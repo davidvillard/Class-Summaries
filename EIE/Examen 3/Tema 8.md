@@ -150,7 +150,8 @@ etc...
 -  Condicion que suelen establecer los bancos en caso de fallecer o invalidez para que asi el banco recupere el préstamo concedido.
 
 
-##### Credito Bancario:
+---
+##### Credito Bancario: 
 
 - Puesta a disposición de una cantidad de dinero en una cuenta de creditro de la cual la empresa pagara intereses por las cantidades que vaya sacando de la misma y otro menor por la cantidad no utilizada. El plazo suele ser de 6 meses y un año por eso es a corto plazo.
 
@@ -162,6 +163,7 @@ etc...
 | A largo plazo, entre 2 y 8 años | A corto plazo, entre 6 meses y 1 año, (puede pactarse su renovación) |
 | Se utiliza para financiar inversiones o bienes de larga duracion | Se utiliza para comprar mercaderías que se van a vender o para necesidades temporales de liquidez |
 
+---
 
 ##### El leasing y el renting:
 
@@ -210,10 +212,36 @@ etc...
 
 ### Crowdfunding:
 
-- El crowdfunding es un método de financiamiento colectivo en el cual un gran número de personas, conocidas como "funders" o financiadores, contribuyen con pequeñas cantidades de dinero para respaldar un proyecto, idea o causa específica. Este modelo permite a los creadores recaudar fondos de una comunidad amplia en línea, evitando depender únicamente de inversores tradicionales o instituciones financieras
+- El crowdfunding es un *método de financiamiento colectivo en el cual un gran número de personas*, conocidas como "funders" o financiadores, *contribuyen con pequeñas cantidades de dinero para respaldar un proyecto*, idea o causa específica. *Este modelo permite a los creadores recaudar fondos* de una comunidad amplia en línea, *evitando depender únicamente de inversores tradicionales o instituciones financieras*
 
 ##### Como funciona?
 
 | Elegir Plataforma       | Recompensas                                          | Campaña                                               | Éxito o No                           |
 |-------------------------|------------------------------------------------------|--------------------------------------------------------|--------------------------------------|
 | El emprendedor del proyecto acude a una de las plataformas de crowdfunding que existen en la red, e indica el proyecto, el dinero que necesita y el plazo en que estará activa la campaña (30-60-90-120 días). | Presenta las recompensas que ofrece según la aportación (dar 1€ puede premiarse con un “muchas gracias”), o si se trata de una inversión en la empresa de las acciones a las que tiene derecho el inversor, o si es de un préstamo los intereses que recibirá el prestamista. En la donación no se suele dar nada a cambio. | Tanto la plataforma como el creador del proyecto se encargan de difundirlo por las redes sociales en busca de cofinanciadores. | Si finalizada la campaña se llega al 100% de lo solicitado, en ese momento se cobra el dinero al que se han comprometido los cofinanciadores, pero si no se llega al 100% no se les cobrará nada. De ahí que las plataformas siempre establezcan una cantidad menor porque más vale pasarse que quedarse corto. |
+
+
+
+## TEST UNIDAD 8
+
+
+1. **No es un bien de inversión cuya duracion sea mayor de un año:**
+   - c. El material de oficina **(Correcta)**
+
+2. **La diferencia entre un inversor informal y un business angel es que:**
+   - d. Todas son diferencias. **(Correcta)**
+
+3. **Una amortizacion es:**
+   - c. La perdida del valor de un bien de inversion por su uso o porque queda obsoleto **(Correcta)**
+
+4. **Indica respecto a un préstamo que no es cierto:**
+   - b. En el sistema francés que utilizamos para calcular los prestamos y las cuotas, los intereses pagados son constantes a lo largo del tiempo. **(Correcta)**
+
+5. **La diferencia entre leasing y renting es:**
+   - c. El renting incluye mantenimiento, reparaciones y seguros, y el leasing no. **(Correcta)**
+
+6. **La diferencia entre el factoring y conforming es:**
+   - b. El factoring no se hace cargo de los impagados y el conforming si. **(Correcta)**
+
+7. **Cuando una empresa solicita un prestamo en un banco puede solicitar simultaneamente:**
+   - a. Una linea ICO donde se reducirán sus intereses del prestamo. **(Correcta)**
