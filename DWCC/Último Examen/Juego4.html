@@ -26,15 +26,28 @@
     </div>
 
     <script>
+        /**
+         * Función para jugar al juego de piedra, papel o tijeras
+         * opcionUsuario es la opción que el usuario selecciona
+         */
         function jugar(opcionUsuario) {
             // Opciones posibles de la computadora
+            // Tenemos un array con las opciones posibles
             var opcionesComputadora = ['piedra', 'papel', 'tijeras'];
+            // opcionComputadora es la opción que la computadora selecciona que es un número aleatorio entre 0 y 2, estos numeros son o piedra (0), papel(1) o tijeras(2)
             var opcionComputadora = opcionesComputadora[Math.floor(Math.random() * 3)];
 
-            // Mostrar la elección de la computadora
+            // Mostramos la eleccion de la computadora
             document.getElementById('resultado').innerHTML = `La computadora eligió: ${opcionComputadora}`;
 
-            // Determinar el resultado del juego
+            /**
+             * Comparamos las opciones del usuario y de la computadora
+             * Si son iguales, es un empate
+             * Si el usuario elige piedra y la computadora tijeras, el usuario gana
+             * Si el usuario elige papel y la computadora piedra, el usuario gana
+             * Si el usuario elige tijeras y la computadora papel, el usuario gana
+             * En cualquier otro caso, la computadora gana
+             */
             if (opcionUsuario === opcionComputadora) {
                 mostrarResultado('¡Empate!');
             } else if (
@@ -47,12 +60,14 @@
                 mostrarResultado('¡Perdiste!');
             }
 
-            // Reiniciar el juego después de 3 segundos
+            // Reinicio el resultado después de 3 segundos
             setTimeout(function() {
+                // Ponemos el resultado en blanco ya que el juego ha terminado y lo reiniciamos
                 document.getElementById('resultado').innerHTML = '';
             }, 3000);
         }
 
+        // Función para mostrar el resultado del juego utilizado en la función jugar
         function mostrarResultado(mensaje) {
             document.getElementById('resultado').innerHTML = mensaje;
         }

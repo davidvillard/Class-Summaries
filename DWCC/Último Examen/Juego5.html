@@ -42,19 +42,31 @@
     </div>
 
     <script>
+        // numeroAleatorio es el número que el usuario tiene que adivinar
         var numeroAleatorio = generarNumeroAleatorio();
+        // intentos es el número de intentos que el usuario ha hecho
         var intentos = 0;
 
+        // Funcion para generar un numero aleatorio entre 1 y 100
         function generarNumeroAleatorio() {
             return Math.floor(Math.random() * 100) + 1;
         }
 
+        /**
+         * Función para adivinar el número
+         * entradaNumero es el input donde el usuario ingresa el número
+         * resultado es el div donde se muestra el resultado
+         * numeroUsuario es el número que el usuario ingresa
+         * Si el numeroUsuario es NaN (no es un numero) o no está entre 1 y 100, se muestra un mensaje de error y se suma un intento
+         * Si el numeroUsuario es igual al numeroAleatorio, se muestra un mensaje de felicitación y se reinicia el juego
+         */
         function adivinarNumero() {
             var entradaNumero = document.getElementById('entradaNumero');
             var resultado = document.getElementById('resultado');
             var numeroUsuario = parseInt(entradaNumero.value);
 
             if (isNaN(numeroUsuario) || numeroUsuario < 1 || numeroUsuario > 100) {
+                //innerHTML es el contenido HTML de un elemento
                 resultado.innerHTML = 'Ingresa un número válido entre 1 y 100.';
             } else {
                 intentos++;
@@ -70,11 +82,22 @@
             }
         }
 
+        /**
+         * Función para mostrar el resultado del juego
+         * Resultado es el div donde se muestra el resultado
+         * por ultimo mostramos dentro de resultado con innerHTML el mensaje que se le pasa como parametro
+         */
         function mostrarResultado(mensaje) {
             var resultado = document.getElementById('resultado');
             resultado.innerHTML = mensaje;
         }
 
+        /**
+         * Función para reiniciar el juego
+         * numeroAleatorio es el número que el usuario tiene que adivinar
+         * intentos es el número de intentos que el usuario ha hecho
+         * Con el setTimeout reiniciamos el juego después de 3 segundos poniendo el resultado en blanco y el input en blanco
+         */
         function reiniciarJuego() {
             numeroAleatorio = generarNumeroAleatorio();
             intentos = 0;

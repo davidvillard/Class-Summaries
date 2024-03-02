@@ -180,3 +180,45 @@
    }
    ```
 
+
+# Posible Examen (Ejemplo):
+
+## Ejercicio 1 (4 puntos): Juego. Eventos del teclado, temporizadores, captura de eventos, objeto evento, manipulación de elementos, atributos y estilos.
+
+### Desarrolla un juego de laberinto simple utilizando HTML, CSS y JavaScript. El juego debe cumplir con los siguientes requisitos:
+
+1. Movimiento del Jugador:
+
+- Crea un elemento en el DOM para representar al jugador (puedes usar un div con un color distintivo).
+- Implementa eventos del teclado para permitir que el jugador se mueva en las cuatro direcciones (arriba, abajo, izquierda, derecha) dentro del laberinto.
+
+2. Temporizadores y Objetivos:
+
+- Utiliza temporizadores para introducir elementos enemigos en el laberinto después de ciertos intervalos de tiempo.
+- El objetivo del juego es llegar a una posición específica del laberinto.
+
+3. Captura de Eventos y Colisiones:
+
+- Captura eventos relevantes (por ejemplo, colisiones con enemigos) utilizando el objeto evento.
+- Implementa acciones específicas cuando el jugador colisiona con enemigos.
+
+4. Manipulación de Elementos y Estilos:
+
+- Manipula dinámicamente elementos del DOM para reflejar cambios en el juego.
+- Utiliza estilos dinámicos para mejorar la presentación del juego en respuesta a eventos (por ejemplo, cambiar el color del jugador al recoger un objeto).
+
+## Ejercicio 2 (2 puntos): Validación de Códigos. Expresiones Regulares y POO.
+### Implementa una aplicación de validación de códigos utilizando HTML, CSS y JavaScript. La aplicación debe incluir:
+
+1. Interfaz de Usuario:
+
+- Crea una interfaz de usuario que permita a los usuarios ingresar códigos en un formulario.
+
+2. Validación de Códigos:
+
+- Define una clase llamada CodigoValidator con un método estático validarCodigo.
+- Utiliza expresiones regulares en el método validarCodigo para verificar que los códigos tengan una longitud mínima de 8 caracteres y contengan al menos un carácter alfabético y un carácter numérico.
+
+3. Presentación de Resultados:
+
+- Muestra mensajes claros en la interfaz de usuario indicando si los códigos ingresados son válidos o no.

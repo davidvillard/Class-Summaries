@@ -26,7 +26,12 @@
     var objetivoY = 200;
     var startTime;
 
-    // Función para manejar el movimiento del jugador
+    /**
+     * Función para mover al jugador con las teclas de dirección
+     * Tenemos varios casos de movimiento, uno para cada dirección, que hace que se mueve en dicha dirección elegida
+     * El parseInt recoge el valor del jugador (que esta en string) y lo pone en int
+     * paso es la cantidad de pixeles que se mueve el jugador
+     */
     function moverJugador(event) {
         var paso = 10;
 
@@ -45,7 +50,12 @@
                 break;
         }
 
-        // Verificar si el jugador alcanzó el objetivo
+        /**
+         * Si el jugador llega a la posición del objetivo, se muestra un mensaje de felicitación y se reinicia el juego
+         * endTime es el tiempo que ha pasado desde que se inicio el juego
+         * tiempoTotal es el tiempo que ha pasado desde que se inicio el juego
+         * startTime es el tiempo que se inicio el juego
+         */
         if (parseInt(jugador.style.left) === objetivoX && parseInt(jugador.style.top) === objetivoY) {
             var endTime = new Date().getTime();
             var tiempoTotal = (endTime - startTime) / 1000;
@@ -54,14 +64,17 @@
         }
     }
 
-    // Función para reiniciar el juego
+    /**
+     * Función para reiniciar el juego
+     * El jugador vuelve a la posición inicial y se reinicia el tiempo
+     */
     function reiniciarJuego() {
         jugador.style.top = '50px';
         jugador.style.left = '50px';
         startTime = new Date().getTime();
     }
 
-    // Agregar evento de teclado
+    // Escucha si se presiona una tecla, y te lleva la funcion de moverJugador donde se elige que hace cada tecla que tocaste, en este caso las de movimiento, si tocas otra no hace nada
     document.addEventListener('keydown', moverJugador);
 
     // Iniciar el temporizador al cargar la página
