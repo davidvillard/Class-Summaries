@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Naves</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: black;
+      }
+      #jugador {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70px;
+        height: 50px;
+        border-radius: 20%;
+        background-color: blue;
+      }
+      #bala {
+        position: absolute;
+        width: 3px;
+        height: 20px;
+        background-color: white;
+      }
+      #enemigo {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70px;
+        height: 50px;
+        border-radius: 20%;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!--Declaramos los divs de lo que aparece en pantalla-->
+    <div id="jugador"></div>
+    <div id="bala"></div>
+    <div id="enemigo"></div>
+    <script>
+        /*
+        Declaramos las variables que se van a utilizar
+        */
+      const jugador = document.getElementById("jugador");
+      const bala = document.getElementById("bala");
+      const enemigo = document.getElementById("enemigo");
+
+      // Asignamos la posición inicial del jugador y del enemigo
+      let jugadorX = window.innerWidth / 2 - 35;
+      let enemigoX = window.innerWidth / 2 - 35;
+      // Declaramos la variable que nos va a indicar la dirección del enemigo
+      let enemigoDirection = 1; // 1 para derecha, -1 para izquierda
+      // Declaramos la variable que nos va a indicar si hubo colisión, inicialmente en falso, esto sirve para que solo muestre la alerta una vez
+      let collisionOccurred = false; // Declarar la variable aquí
+      // Declaramos esta variable aqui para que la bala siempre vaya a la misma velocidad
+      let intervalId; 
+
+      /**
+       * Agregamos un evento que escuche cuando se presiona una tecla
+       * Si se presiona la tecla de flecha derecha, el jugador se mueve a la derecha
+       * Si se presiona la tecla de flecha izquierda, el jugador se mueve a la izquierda
+       */
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          jugadorX += 20;
+        } else if (event.key === "ArrowLeft") {
+          jugadorX -= 20;
+        }
+        jugador.style.left = jugadorX + "px";
+      });
+
+      /**
+       * Agregamos un evento que escuche cuando se hace click
+       * Si se hace click, se detiene el intervalo y se llama a la función moveBala
+       * El clearInterval detiene el intervalo que se está ejecutando, con esto evitamos que se disparen varias balas a la vez
+       */
+
+      document.addEventListener("click", function () {
+        clearInterval(intervalId);
+        moveBala();
+      });
+
+      // Llamamos a la función moveEnemigo cada 100 milisegundos
+      setInterval(moveEnemigo, 100);
+
+      /**
+       * Función que se encarga de mover la bala
+       * Coloca la bala inicialmente en la posición del jugador un poco mas arriba
+       * Mueve la bala hacia arriba en intervalos regulares
+       * Verifica si la bala toca al enemigo
+       * Si la bala toca el techo, detiene el intervalo
+       */
+      function moveBala() {
+        // Coloca la bala inicialmente en la posición del jugador
+        // El style.left y style.top son las posiciones en las que se va a colocar la bala
+        bala.style.left = jugadorX + 35 + "px";
+        bala.style.top = window.innerHeight - 80 + "px";
+
+        // Mueve la bala hacia arriba en intervalos regulares
+        intervalId = setInterval(function () {
+            // el parseInt convierte el valor de la posición de la bala a un número entero
+          let currentTop = parseInt(bala.style.top);
+
+          // Mueve la bala hacia arriba (-2px)
+          // CurrenTop representa la posición actual de la bala, le restamos 15 para que se mueva hacia arriba
+          bala.style.top = currentTop - 15 + "px";
+
+          // Verifica si la bala toca al enemigo
+          /**
+           * Si la bala toca al enemigo y ha ocurrido una colisión (recordemos que está en falso), detiene el intervalo y muestra una alerta de que has ganado
+           */
+          if (checkCollision(bala, enemigo) && !collisionOccurred) {
+            clearInterval(intervalId);
+            collisionOccurred = true;
+            alert("¡Has ganado!");
+          }
+
+          // Si la bala toca el techo, detiene el intervalo
+          /**
+           * Si la bala toca el techo, detiene el intervalo, esto es para que no siga subiendo la bala
+           */
+          if (currentTop <= 0) {
+            clearInterval(intervalId);
+          }
+        }, 16); // Aproximadamente 60 fps
+      }
+
+      /**
+       * Función que se encarga de mover al enemigo
+       * El style.left es la posición en la que se va a colocar el enemigo
+       * Cambia la dirección si llega a los bordes
+       * Actualiza la posición del enemigo
+       */
+      function moveEnemigo() {
+        // Mueve al enemigo de lado a lado
+        // El style.left es la posición en la que se va a colocar el enemigo
+        enemigo.style.left = enemigoX + "px";
+
+        // Cambia la dirección si llega a los bordes
+        if (
+          enemigoX <= 0 ||
+          enemigoX + enemigo.offsetWidth >= window.innerWidth
+        ) {
+          enemigoDirection *= -1;
+        }
+
+        // Actualiza la posición del enemigo
+        // Esto es cuanto se va a mover el enemigo
+        enemigoX += enemigoDirection * 30;
+      }
+
+      /**
+       * Función que se encarga de verificar si hay colisión entre dos objetos
+       * La función getBoundingClientRect() devuelve el tamaño de un elemento y su posición relativa respecto a la ventana de visualización
+       * Si el objeto 1 toca al objeto 2, devuelve verdadero, de lo contrario, devuelve falso y sigue con el juego
+       */
+      function checkCollision(obj1, obj2) {
+        return (
+          obj1.getBoundingClientRect().right >
+            obj2.getBoundingClientRect().left &&
+          obj1.getBoundingClientRect().left <
+            obj2.getBoundingClientRect().right &&
+          obj1.getBoundingClientRect().bottom >
+            obj2.getBoundingClientRect().top &&
+          obj1.getBoundingClientRect().top < obj2.getBoundingClientRect().bottom
+        );
+      }
+    </script>
+  </body>
+</html>

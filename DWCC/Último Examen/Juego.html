@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Movimiento</title>
+    <style>
+        #jugador {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="jugador"></div>
+
+<script>
+    // Variables del juego
+    var jugador = document.getElementById('jugador');
+    var objetivoX = 300;
+    var objetivoY = 200;
+    var startTime;
+
+    // Función para manejar el movimiento del jugador
+    function moverJugador(event) {
+        var paso = 10;
+
+        switch (event.key) {
+            case 'ArrowUp':
+                jugador.style.top = (parseInt(jugador.style.top) - paso) + 'px';
+                break;
+            case 'ArrowDown':
+                jugador.style.top = (parseInt(jugador.style.top) + paso) + 'px';
+                break;
+            case 'ArrowLeft':
+                jugador.style.left = (parseInt(jugador.style.left) - paso) + 'px';
+                break;
+            case 'ArrowRight':
+                jugador.style.left = (parseInt(jugador.style.left) + paso) + 'px';
+                break;
+        }
+
+        // Verificar si el jugador alcanzó el objetivo
+        if (parseInt(jugador.style.left) === objetivoX && parseInt(jugador.style.top) === objetivoY) {
+            var endTime = new Date().getTime();
+            var tiempoTotal = (endTime - startTime) / 1000;
+            alert('¡Felicidades! Has llegado al objetivo en ' + tiempoTotal + ' segundos.');
+            reiniciarJuego();
+        }
+    }
+
+    // Función para reiniciar el juego
+    function reiniciarJuego() {
+        jugador.style.top = '50px';
+        jugador.style.left = '50px';
+        startTime = new Date().getTime();
+    }
+
+    // Agregar evento de teclado
+    document.addEventListener('keydown', moverJugador);
+
+    // Iniciar el temporizador al cargar la página
+    window.onload = function () {
+        reiniciarJuego();
+    };
+</script>
+
+</body>
+</html>

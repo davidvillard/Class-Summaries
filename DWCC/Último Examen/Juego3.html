@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .tablero {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            gap: 10px;
+        }
+
+        .carta {
+            width: 100px;
+            height: 150px;
+            background-color: lightgray;
+            border: 2px solid gray;
+            text-align: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="tablero" class="tablero"></div>
+
+    <script>
+        var tablero = document.getElementById('tablero');
+        var cartas = [];
+        var cartaSeleccionada = null;
+
+        // Crear cartas y añadir al tablero
+        for (var i = 0; i < 8; i++) {
+            var carta = document.createElement('div');
+            carta.className = 'carta';
+            carta.setAttribute('data-valor', i);
+
+            // Añadir temporizador para ocultar la carta después de 2 segundos
+            setTimeout(function(carta) {
+                carta.innerText = 'X';
+            }, 2000, carta);
+
+            // Agregar evento de clic para seleccionar la carta
+            carta.addEventListener('click', function(event) {
+                manejarClicCarta(event.target);
+            });
+
+            tablero.appendChild(carta);
+            cartas.push(carta);
+        }
+
+        // Manejar el evento de teclado para navegar entre las cartas
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' && cartaSeleccionada !== null) {
+                moverCarta(cartaSeleccionada.nextElementSibling);
+            } else if (event.key === 'ArrowLeft' && cartaSeleccionada !== null) {
+                moverCarta(cartaSeleccionada.previousElementSibling);
+            }
+        });
+
+        function moverCarta(nuevaCarta) {
+            if (nuevaCarta !== null) {
+                manejarClicCarta(nuevaCarta);
+            }
+        }
+
+        function manejarClicCarta(carta) {
+            if (carta.innerText === 'X') {
+                // Muestra el valor de la carta seleccionada
+                var valor = carta.getAttribute('data-valor');
+                carta.innerText = valor;
+
+                // Comprobar si hay una carta seleccionada anteriormente
+                if (cartaSeleccionada !== null) {
+                    // Comprobar si las cartas forman un par
+                    if (cartaSeleccionada.innerText === carta.innerText) {
+                        console.log('¡Encontraste un par!');
+                        cartaSeleccionada = null;
+                    } else {
+                        // Ocultar las cartas después de un breve tiempo
+                        setTimeout(function() {
+                            cartaSeleccionada.innerText = 'X';
+                            carta.innerText = 'X';
+                            cartaSeleccionada = null;
+                        }, 1000);
+                    }
+                } else {
+                    // No hay carta seleccionada previamente
+                    cartaSeleccionada = carta;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

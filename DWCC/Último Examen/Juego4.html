@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #juego-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #resultado {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="juego-container">
+        <h2>Juego de Piedra, Papel o Tijeras</h2>
+        <p>Selecciona tu opción:</p>
+        <button onclick="jugar('piedra')">Piedra</button>
+        <button onclick="jugar('papel')">Papel</button>
+        <button onclick="jugar('tijeras')">Tijeras</button>
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        function jugar(opcionUsuario) {
+            // Opciones posibles de la computadora
+            var opcionesComputadora = ['piedra', 'papel', 'tijeras'];
+            var opcionComputadora = opcionesComputadora[Math.floor(Math.random() * 3)];
+
+            // Mostrar la elección de la computadora
+            document.getElementById('resultado').innerHTML = `La computadora eligió: ${opcionComputadora}`;
+
+            // Determinar el resultado del juego
+            if (opcionUsuario === opcionComputadora) {
+                mostrarResultado('¡Empate!');
+            } else if (
+                (opcionUsuario === 'piedra' && opcionComputadora === 'tijeras') ||
+                (opcionUsuario === 'papel' && opcionComputadora === 'piedra') ||
+                (opcionUsuario === 'tijeras' && opcionComputadora === 'papel')
+            ) {
+                mostrarResultado('¡Ganaste!');
+            } else {
+                mostrarResultado('¡Perdiste!');
+            }
+
+            // Reiniciar el juego después de 3 segundos
+            setTimeout(function() {
+                document.getElementById('resultado').innerHTML = '';
+            }, 3000);
+        }
+
+        function mostrarResultado(mensaje) {
+            document.getElementById('resultado').innerHTML = mensaje;
+        }
+    </script>
+</body>
+</html>
