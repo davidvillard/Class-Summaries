@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #jugador {
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        position: absolute;
+        top: 300px;
+        left: 250px;
+      }
+
+      #enemigo {
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        position: absolute;
+        top: 300px;
+        left: 250px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="jugador"></div>
+    <div id="enemigo"></div>
+
+    <script>
+      const jugador = document.getElementById("jugador");
+      jugador.style.left = "250px";
+      jugador.style.top = "300px";
+      const enemigo = document.getElementById("enemigo");
+      enemigo.style.left = Math.floor(Math.random() * 800) + "px";
+      enemigo.style.top = Math.floor(Math.random() * 800) + "px";
+
+      function moverJugador(event) {
+        let seMueve = 50;
+
+        switch (event.key) {
+          case "ArrowRight":
+            jugador.style.left = parseInt(jugador.style.left) + seMueve + "px";
+            break;
+          case "ArrowLeft":
+            jugador.style.left = parseInt(jugador.style.left) - seMueve + "px";
+            break;
+          case "ArrowUp":
+            jugador.style.top = parseInt(jugador.style.top) - seMueve + "px";
+            break;
+          case "ArrowDown":
+            jugador.style.top = parseInt(jugador.style.top) + seMueve + "px";
+            break;
+        }
+        chocan();
+      }
+
+      function aparecerEnemigoCadaTiempo() {
+        const intervalId = setInterval(() => {
+          // Genera posiciones aleatorias dentro de un rango específico
+          const leftPosition = Math.floor(Math.random() * 500) + "px";
+          const topPosition = Math.floor(Math.random() * 500) + "px";
+
+          // Aplica las posiciones al enemigo
+          enemigo.style.left = leftPosition;
+          enemigo.style.top = topPosition;
+
+          // Configura otro intervalo para desaparecer el enemigo después de un corto tiempo
+          setTimeout(() => {
+            enemigo.style.left = "-100px"; // Mueve el enemigo fuera del área visible (ajusta según sea necesario)
+            enemigo.style.top = "-100px";
+          }, 1000); // Cambia el valor según sea necesario para ajustar el tiempo de desaparición
+        }, 2000);
+      }
+
+      function chocan(){
+        const jugadorPosicion = jugador.getBoundingClientRect();
+        const enemigoPosicion = enemigo.getBoundingClientRect(); 
+
+        if (
+          jugadorPosicion.left < enemigoPosicion.left + enemigoPosicion.width &&
+          jugadorPosicion.left + jugadorPosicion.width > enemigoPosicion.left &&
+          jugadorPosicion.top < enemigoPosicion.top + enemigoPosicion.height &&
+          jugadorPosicion.top + jugadorPosicion.height > enemigoPosicion.top
+        ) {
+          jugador.style.backgroundColor = "orange";
+          
+          setTimeout(() => {
+            jugador.style.backgroundColor = "red";
+          }, 500);
+        }
+      }
+
+      document.addEventListener("keydown", moverJugador);
+      aparecerEnemigoCadaTiempo();
+      
+    </script>
+  </body>
+</html>
